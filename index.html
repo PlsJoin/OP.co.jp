@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OP Portal</title>
+<meta name="description" content="OP Portalの公式Webサイト。会社概要、理念、経営目標、製品へのアクセスをご案内します。">
+<style>
+:root {
+  --paper: #ffffff;
+  --surface: #f3f5f8;
+  --ink: #14202e;
+  --slate: #566273;
+  --line: #d6dce4;
+  --accent: #1f4b99;
+  --accent-ink: #ffffff;
+  --header-h: 68px;
+  --wrap: 1120px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 8px);
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Hiragino Sans", "Noto Sans JP", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--header-h);
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid var(--line);
+  z-index: 50;
+}
+
+.site-header .wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.site-nav { position: relative; }
+
+.menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 6px;
+}
+
+.menu-list a {
+  display: block;
+  padding: 8px 14px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--slate);
+  border-bottom: 2px solid transparent;
+}
+
+.menu-list a:hover { color: var(--ink); }
+
+.menu-list a[aria-current="true"] {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--line);
+  padding: 8px 16px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.hero {
+  padding: calc(var(--header-h) + 96px) 0 96px;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 72px;
+  align-items: end;
+}
+
+.hero h1 {
+  margin: 0 0 28px;
+  font-size: clamp(34px, 5.4vw, 60px);
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.hero-lead {
+  margin: 0 0 36px;
+  max-width: 34em;
+  color: var(--slate);
+}
+
+.button {
+  display: inline-block;
+  padding: 14px 30px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.button:hover { background: #173b78; }
+
+.facts {
+  margin: 0;
+  border-top: 2px solid var(--ink);
+}
+
+.facts div {
+  display: grid;
+  grid-template-columns: 6.5em 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.facts dt { color: var(--slate); }
+.facts dd { margin: 0; }
+
+.section { padding: 96px 0; }
+.section.alt { background: var(--surface); }
+
+.section-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr);
+  gap: 72px;
+}
+
+.section-head h2 {
+  margin: 0;
+  font-size: 26px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.section-body { max-width: 40em; }
+.section-body p { margin: 0 0 1.2em; }
+
+.profile {
+  margin: 0;
+  max-width: 44em;
+  border-top: 2px solid var(--ink);
+}
+
+.profile div {
+  display: grid;
+  grid-template-columns: 9em 1fr;
+  gap: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.profile dt { color: var(--slate); font-size: 14px; }
+.profile dd { margin: 0; }
+
+.statement {
+  margin: 0 0 28px;
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.goal-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 44em;
+  border-top: 2px solid var(--ink);
+}
+
+.goal-list li {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.goal-list strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 18px;
+}
+
+.goal-list span { color: var(--slate); font-size: 15px; }
+
+.product-list { border-top: 2px solid var(--ink); }
+
+.product-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.8fr) auto;
+  gap: 32px;
+  align-items: center;
+  padding: 24px 12px;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  background: var(--paper);
+}
+
+.product-row:hover { background: var(--surface); }
+
+.product-name { font-size: 20px; font-weight: 700; }
+.product-desc { color: var(--slate); font-size: 15px; }
+
+.product-action {
+  padding: 8px 18px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.product-row:hover .product-action {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.site-footer {
+  padding: 40px 0;
+  background: var(--ink);
+  color: #c9d1db;
+  font-size: 13px;
+}
+
+.site-footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 860px) {
+  .hero { padding-bottom: 64px; }
+  .hero-grid,
+  .section-head { grid-template-columns: 1fr; gap: 36px; }
+  .section { padding: 64px 0; }
+
+  .menu-toggle { display: block; }
+
+  .menu-list {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 12px);
+    min-width: 200px;
+    flex-direction: column;
+    gap: 0;
+    background: var(--paper);
+    border: 1px solid var(--line);
+  }
+
+  .menu-list.is-open { display: flex; }
+  .menu-list a { padding: 14px 18px; border-bottom: 1px solid var(--line); }
+  .menu-list li:last-child a { border-bottom: none; }
+
+  .product-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 22px 8px;
+  }
+
+  .product-action { justify-self: start; margin-top: 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="OP Portal トップへ">
+      <span class="brand-mark">OP</span>
+      <span>OP Portal</span>
+    </a>
+    <nav id="site-menu" class="site-nav" aria-label="メインメニュー"></nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>必要な場所へ、迷わずたどり着ける入口をつくる。</h1>
+        <p class="hero-lead">OP Portalは、私たちが提供するWebサイトやサービスをひとつにまとめ、誰でもすぐに目的の場所へアクセスできる環境を運営しています。</p>
+        <a class="button" href="#products">製品を見る</a>
+      </div>
+      <dl class="facts">
+        <div><dt>会社名</dt><dd>OP Portal</dd></div>
+        <div><dt>事業内容</dt><dd>Webサイト・サービスの公開と運営</dd></div>
+        <div><dt>公開ドメイン</dt><dd>plsjoin.domain</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>概要</h2>
+        <div>
+          <div class="section-body">
+            <p>OP Portalは、複数のWebサイトとサービスを運営し、利用者がそれらへ簡単にアクセスできるよう整理して公開しています。</p>
+            <p>ここに会社の詳しい紹介文を入力してください。</p>
+          </div>
+          <dl class="profile">
+            <div><dt>会社名</dt><dd>OP Portal</dd></div>
+            <div><dt>設立</dt><dd>0000年0月</dd></div>
+            <div><dt>所在地</dt><dd>ここに所在地を入力</dd></div>
+            <div><dt>代表者</dt><dd>ここに代表者名を入力</dd></div>
+            <div><dt>事業内容</dt><dd>Webサイト・サービスの公開と運営</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="philosophy" class="section alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>理念</h2>
+        <div class="section-body">
+          <p class="statement">すべての人に、使いやすい入口を。</p>
+          <p>情報やサービスは、見つけやすく、使いやすくあるべきだと考えています。ここに理念の説明文を入力してください。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="goals" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>経営目標</h2>
+        <ul class="goal-list">
+          <li>
+            <strong>利用しやすさを高める</strong>
+            <span>サイトとサービスへのアクセスを、よりわかりやすく整理します。</span>
+          </li>
+          <li>
+            <strong>提供するサービスを広げる</strong>
+            <span>利用者の声をもとに、新しい製品とサイトを継続して公開します。</span>
+          </li>
+          <li>
+            <strong>安定した運営を続ける</strong>
+            <span>いつでも安心して使える環境を維持します。</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="products" class="section alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>製品</h2>
+        <div class="section-body">
+          <p>実際にご利用いただける製品の一覧です。各サイトは別のページで開きます。</p>
+        </div>
+      </div>
+      <div id="product-list" class="product-list" style="margin-top: 40px;"></div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>お問い合わせ</h2>
+        <div class="section-body">
+          <p>ご質問やご相談は、下記の連絡先までお寄せください。</p>
+          <p>メール：ここに連絡先を入力</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>OP Portal</span>
+    <span>&copy; 2026 OP Portal</span>
+  </div>
+</footer>
+
+<script src="menu.js"></script>
+</body>
+</html>
